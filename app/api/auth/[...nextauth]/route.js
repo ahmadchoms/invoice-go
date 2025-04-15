@@ -1,10 +1,11 @@
 import NextAuth from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { auth } from "@/lib/firebase/init";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 export const authOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
+  site: process.env.NEXTAUTH_URL,
   providers: [
     CredentialsProvider({
       name: "Credentials",
