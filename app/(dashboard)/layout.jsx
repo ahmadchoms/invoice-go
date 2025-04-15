@@ -1,6 +1,14 @@
 import { DashboardSidebar } from "@/components/layouts/dashboard-sidebar";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/route";
+import { redirect } from "next/navigation";
 
-export default function DashboardLayout({ children }) {
+export default async function DashboardLayout({ children }) {
+    const session = await getServerSession(authOptions);
+
+    if (!session) {
+        redirect("/");
+    }
     return (
         <div className="flex min-h-screen overflow-hidden">
             <DashboardSidebar />
